@@ -1,0 +1,34 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Student Management System</title>
+    {% block head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'students/styles.css' %}">
+    {% endblock %}
+</head>
+
+<body>
+    <nav>
+        <a href="{% url 'student_list' %}">Home</a> |
+        <a href="{% url 'student_add' %}">Add Student</a>
+    </nav>
+
+    {% if messages %}
+    <ul>
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    {% block content %}
+    <!-- Page content will be injected here -->
+    {% endblock %}
+
+    <footer>
+        <p>&copy; 2023 Student Management System</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,35 @@
+{% extends 'students/base.html' %}
+
+{% block content %}
+<h1>Student List</h1>
+
+
+<form method="get">
+    <input type="text" name="q" placeholder="Search by name" value="{{ request.GET.q }}">
+    <button type="submit">Search</button>
+</form>
+
+
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Course</th>
+        <th>Actions</th>
+    </tr>
+    {% for student in students %}
+    <tr>
+        <td>{{ student.name }}</td>
+        <td>{{ student.get_course_display }}</td>
+        <td>
+            <a href="{% url 'student_detail' student.pk %}">View</a> |
+            <a href="{% url 'student_update' student.pk %}">Edit</a> |
+            <a href="{% url 'student_delete' student.pk %}">Delete</a>
+        </td>
+    </tr>
+    {% empty %}
+    <tr>
+        <td colspan="3">No students found.</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}
